@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
             val allA = allLi.select("a")
             val allID = allA.textNodes()
             allID.forEachIndexed{ idIndex, id ->
-                if(id.text().length <= 4){
+                if(id.text().length <= 6){
                     val transportId = AllTransport.allTransport.size
                     val transportDoc: Document = Jsoup.connect(allA[idIndex].attr("href")).get()
                     val transportLi = transportDoc.select("li")
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
                     val transportTypeName = transportDoc.select("h1").first().text()?.lowercase()?:""
                     val transportType =
-                        if(transportTypeName.contains("автобус") || transportTypeName.contains("маршрутное Такси"))
+                        if(transportTypeName.contains("автобус") || transportTypeName.contains("такси"))
                             TransportType.BUS
                         else
                             if(transportTypeName.contains("троллейбус"))
